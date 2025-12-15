@@ -2,6 +2,7 @@ import "./_styles/global.css";
 import { Logo } from "./_components/Logo";
 import { Navigation } from "./_components/Navigation";
 import {Josefin_Sans} from "next/font/google";
+import { Header } from "./_components/Header";
 
 const josefinSans = Josefin_Sans({
   subsets: ['latin'],
@@ -24,14 +25,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className={josefinSans.className}>
-      <body className="bg-primary-950 text-primary-50 min-h-screen">
-        <header>
-          <Logo />
-          <Navigation />
-        </header>
-        <main>
-          {children}
-        </main>
+      <body className='antialiased bg-primary-950 text-primary-50 min-h-screen flex flex-col'>
+        <Header />
+        <div className='flex-1 px-8 py-12'>
+          <main className='max-w-7xl mx-auto w-full'>{children}</main>
+        </div>
       </body>
     </html>
   );
