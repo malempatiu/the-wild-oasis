@@ -1,7 +1,8 @@
+import { notFound } from "next/navigation";
 import { supabase } from "./api-client";
 import { Cabin } from "./types";
 
-const getCountries = async() =>{
+const getCountries = async() => {
   try {
     const res = await fetch(
       'https://restcountries.com/v2/all?fields=name,flag'
@@ -13,7 +14,7 @@ const getCountries = async() =>{
   }
 }
 
-const getCabins = async (): Promise<Cabin[]> =>{
+const getCabins = async (): Promise<Cabin[]> => {
   const { data, error } = await supabase
     .from("cabins")
     .select("id, name, maxCapacity, regularPrice, discount, image")
@@ -27,4 +28,19 @@ const getCabins = async (): Promise<Cabin[]> =>{
   return data ?? [];
 };
 
-export { getCountries, getCabins };
+const getCabin = async (id: number): Promise<Cabin> =>{
+  const { data, error } = await supabase
+    .from("cabins")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error(error);
+    notFound();
+  }
+
+  return data;
+}
+
+export { getCountries, getCabins, getCabin };
