@@ -7,18 +7,20 @@ type Props = {
   params: Promise<{ cabinId: string }>
 }
 
+// For dynamic SEO titles
 export const generateMetadata = async ({ params }: Props) =>{
   const { cabinId } = await params;
   const { name } = await getCabin(parseInt(cabinId));
   return { title: `Cabin ${name}` };
 }
 
+// Generate static params for all cabins to enable static generation
 export const generateStaticParams = async () => {
   const cabins = await getCabins();
   return cabins.map((cabin) => ({ cabinId: cabin.id.toString() }));
 };
 
-
+// Main page component for displaying individual cabin details
 const Page = async ({ params }: Props) =>{
   const { cabinId } = await params;
   const cabin = await getCabin(parseInt(cabinId));

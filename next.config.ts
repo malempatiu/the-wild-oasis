@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
+/** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
+  // Configure image domains for Next.js Image component
+  // Allows loading images from external sources like Supabase storage
   images: {
     remotePatterns: [
       {
@@ -10,6 +13,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Enable static(SSG) export for deployment to static hosting
+  // output: 'export',
 };
 
 export default nextConfig;
