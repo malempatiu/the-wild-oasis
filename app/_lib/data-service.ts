@@ -25,7 +25,7 @@ const getCabins = async (): Promise<Cabin[]> => {
     throw new Error("Cabins could not be loaded");
   }
 
-  return data ?? [];
+  return data as Cabin[] ?? [];
 };
 
 const getCabin = async (id: number): Promise<Cabin> =>{
