@@ -1,20 +1,15 @@
-import { CabinCard } from "@/app/_components/CabinCard";
+import { Suspense } from "react";
+import { CabinList } from "@/app/_components/CabinList";
+import { Spinner } from "../_components/Spinner";
+
+// Revalidate every hour (ISR)
+export const revalidate = 3600; 
 
 export const metadata = {
   title: "Cabins",
 };
 
-type Cabin = {
-  id: number;
-  name: string;
-  maxCapacity: number;
-  regularPrice: number;
-  discount: number;
-  image: string;
-};
-
 const CabinsPage = () => {
-  const cabins: Cabin[] = [];
   return (
     <div>
       <h1 className='text-4xl mb-5 text-accent-400 font-medium'>
@@ -29,13 +24,9 @@ const CabinsPage = () => {
         Welcome to paradise.
       </p>
 
-      {cabins.length ? (
-        <div className='grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14'>
-          {cabins.map((cabin) => (
-            <CabinCard cabin={cabin} key={cabin.id} />
-          ))}
-        </div>
-      ) : null}
+      <Suspense fallback={<Spinner />}>
+        <CabinList />
+      </Suspense>
     </div>
   );
 };

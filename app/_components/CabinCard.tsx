@@ -16,11 +16,14 @@ const CabinCard = ({cabin}: {cabin: Cabin}) => {
   const {id, name, maxCapacity, regularPrice, discount, image} = cabin;
   return (
     <div className='flex border-primary-800 border'>
-      <Image
-        src={image}
-        alt={`Cabin ${name}`}
-        className='flex-1 border-r border-primary-800'
-      />
+      <div className='flex-1 relative'>
+        <Image
+          src={image}
+          fill
+          alt={`Cabin ${name}`}
+          className='object-cover border-r border-primary-800'
+        />
+      </div>
 
       <div className='grow'>
         <div className='pt-5 pb-4 px-7 bg-primary-950'>
