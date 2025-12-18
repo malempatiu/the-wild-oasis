@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { CabinList } from "@/app/_components/CabinList";
-import { Spinner } from "../_components/Spinner";
+import { Spinner } from "@/app/_components/Spinner";
+import { CabinsFilter } from "@/app/_components/CabinsFilter";
 
 // Revalidate every hour (ISR)
 export const revalidate = 3600; 
@@ -9,7 +10,8 @@ export const metadata = {
   title: "Cabins",
 };
 
-const CabinsPage = () => {
+const CabinsPage = async({ searchParams }: { searchParams?: { capacity?: string } }) => {
+  const filter = (await searchParams)?.capacity ?? "all";
   return (
     <div>
       <h1 className='text-4xl mb-5 text-accent-400 font-medium'>
@@ -24,8 +26,12 @@ const CabinsPage = () => {
         Welcome to paradise.
       </p>
 
-      <Suspense fallback={<Spinner />}>
-        <CabinList />
+      <div className='flex justify-end mb-8'>
+        <CabinsFilter />
+      </div>
+
+      <Suspense fallback={<Spinner />} key={filter}>
+        <CabinList filter={filter} />
       </Suspense>
     </div>
   );
