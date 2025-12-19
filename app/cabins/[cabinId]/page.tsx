@@ -22,7 +22,6 @@ export const generateStaticParams = async () => {
   return cabins.map((cabin) => ({ cabinId: cabin.id.toString() }));
 };
 
-// Main page component for displaying individual cabin details
 const Page = async ({ params }: Props) =>{
   const { cabinId } = await params;
   const cabin = await getCabin(parseInt(cabinId));
