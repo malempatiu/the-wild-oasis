@@ -7,3 +7,12 @@ export type Cabin = {
     image: string,
     description: string,
 }
+
+export type BookingSettings = {
+    id: number,
+    minBookingLength: number,
+    maxBookingLength: number,
+    maxGuestPerBooking: number,
+    breakfastPrice: number,
+    createdAt: string,
+}
