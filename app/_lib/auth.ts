@@ -12,10 +12,11 @@ const authConfig = {
       clientSecret: process.env.AUTH_GOOGLE_SECRET,
     }),
   ],
-  // callbacks: {
-  //   authorized({ auth }: { auth: Session | null }) {
-  //     return !!auth?.user;
-  //   },
+  callbacks: {
+    authorized({ auth }: { auth: Session | null }) {
+      return !!auth?.user;
+    },
+  },
   //   async signIn({ user }: { user: User }) {
   //     try {
   //       if (!user.email || !user.name) return false;
