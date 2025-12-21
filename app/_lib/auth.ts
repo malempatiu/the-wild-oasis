@@ -16,27 +16,27 @@ const authConfig = {
     authorized({ auth }: { auth: Session | null }) {
       return !!auth?.user;
     },
-    // async signIn({ user }: { user: User }) {
-    //   try {
-    //     if (!user.email || !user.name) return false;
+    async signIn({ user }: { user: User }) {
+      try {
+        if (!user.email || !user.name) return false;
 
-    //     const existingGuest = await getGuest(user.email);
+        const existingGuest = await getGuest(user.email);
 
-    //     if (!existingGuest)
-    //       await createGuest({ email: user.email, fullName: user.name });
+        if (!existingGuest)
+          await createGuest({ email: user.email, fullName: user.name });
 
-    //     return true;
-    //   } catch {
-    //     return false;
-    //   }
-    // },
-    // async session({ session }: { session: Session }) {
-    //   const guest = await getGuest(session.user!.email!);
-    //   if (guest) {
-    //     (session.user as ExtendedUser).guestId = guest.id;
-    //   }
-    //   return session;
-    // },
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    async session({ session }: { session: Session }) {
+      const guest = await getGuest(session.user!.email!);
+      if (guest) {
+        (session.user as ExtendedUser).guestId = guest.id;
+      }
+      return session;
+    },
   },
   pages: {
     signIn: "/login",
