@@ -25,3 +25,19 @@ export type Guest = {
     countryFlag?: string,
     nationalID?: string,
 }
+
+export type Booking = {
+    id: number;
+    created_at: string;
+    startDate: string;
+    endDate: string;
+    numNights: number;
+    numGuests: number;
+    totalPrice: number;
+    guestId: number;
+    cabinId: number;
+}
+
+export type BookingsWithCabin = Booking & {
+    cabins: Pick<Cabin, "name" | "image">[]
+}
