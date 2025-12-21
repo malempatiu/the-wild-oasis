@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { supabase } from "./api-client";
-import { Cabin, Guest } from "./types";
+import { BookingsWithCabin, Cabin, Guest } from "./types";
 import { eachDayOfInterval } from "date-fns";
 
 const getCountries = async() => {
@@ -108,6 +108,24 @@ const getGuest = async (email: string): Promise<Guest | null> => {
   return data;
 }
 
+const getBookings = async (guestId: number): Promise<BookingsWithCabin[]> => {
+  const { data, error } = await supabase
+    .from("bookings")
+    // We actually also need data on the cabins as well. But let's ONLY take the data that we actually need, in order to reduce downloaded data.
+    .select(
+      "id, created_at, startDate, endDate, numNights, numGuests, totalPrice, guestId, cabinId, cabins(name, image)"
+    )
+    .eq("guestId", guestId)
+    .order("startDate");
+
+  if (error) {
+    console.error(error);
+    throw new Error("Bookings could not get loaded");
+  }
+
+  return data;
+}
+
 export { 
   getCountries, 
   getCabins, 
@@ -115,5 +133,6 @@ export {
   getBookedDatesByCabinId, 
   getSettings,
   createGuest,
-  getGuest 
+  getGuest,
+  getBookings 
 };

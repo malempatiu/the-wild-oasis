@@ -5,7 +5,6 @@ import { Cabin } from "../_lib/types";
 
 const ReservationForm = ({ cabin, user }: {cabin: Cabin, user: User}) => {
   const { maxCapacity } = cabin;
-  console.log(user)
 
   return (
     <div className='scale-[1.01]'>
