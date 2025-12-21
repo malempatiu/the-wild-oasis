@@ -1,11 +1,11 @@
 "use client";
 
-import { useReservation } from "../_context/ReservationContext";
+import { User } from "next-auth";
 import { Cabin } from "../_lib/types";
 
-const ReservationForm = ({ cabin }: {cabin: Cabin}) => {
-  const { range } = useReservation();
+const ReservationForm = ({ cabin, user }: {cabin: Cabin, user: User}) => {
   const { maxCapacity } = cabin;
+  console.log(user)
 
   return (
     <div className='scale-[1.01]'>
@@ -17,10 +17,10 @@ const ReservationForm = ({ cabin }: {cabin: Cabin}) => {
             // Important to display google profile images
             referrerPolicy='no-referrer'
             className='h-8 rounded-full'
-            src={''}
-            alt={''}
+            src={user.image || ""}
+            alt={user.name || "User profile picture"}
           />
-          <p>{}</p>
+          <p>{user.name}</p>
         </div>
       </div>
 

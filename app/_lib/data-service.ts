@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { supabase } from "./api-client";
-import { Cabin } from "./types";
+import { Cabin, Guest } from "./types";
 import { eachDayOfInterval } from "date-fns";
 
 const getCountries = async() => {
@@ -86,4 +86,34 @@ const getSettings = async () => {
   return data?.[0];
 }
 
-export { getCountries, getCabins, getCabin, getBookedDatesByCabinId, getSettings };
+const createGuest = async (newGuest: Guest) => {
+  const { data, error } = await supabase.from("guests").insert([newGuest]);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Guest could not be created");
+  }
+
+  return data;
+}
+
+const getGuest = async (email: string): Promise<Guest | null> => {
+  const { data, error } = await supabase
+    .from("guests")
+    .select("*")
+    .eq("email", email)
+    .single();
+
+  // No error here! We handle the possibility of no guest in the sign in callback
+  return data;
+}
+
+export { 
+  getCountries, 
+  getCabins, 
+  getCabin, 
+  getBookedDatesByCabinId, 
+  getSettings,
+  createGuest,
+  getGuest 
+};
