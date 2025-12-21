@@ -16,3 +16,12 @@ export type BookingSettings = {
     breakfastPrice: number,
     createdAt: string,
 }
+
+export type Guest = {
+    id?: number,
+    email: string,
+    fullName: string,
+    nationality?: string,
+    countryFlag?: string,
+    nationalID?: string,
+}

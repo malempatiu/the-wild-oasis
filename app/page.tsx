@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import bg from "@/public/bg.png";
+import {SignIn} from "./_components/SignIn";
 
 
 const Page = () => {
@@ -24,6 +25,7 @@ const Page = () => {
         >
           Explore luxury cabins
         </Link>
+        <SignIn />
       </div>
     </div>
   );
