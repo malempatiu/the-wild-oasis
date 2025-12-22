@@ -1,6 +1,6 @@
 # The Wild Oasis
 
-A modern, full-stack luxury cabin rental application built with Next.js. Experience the beauty of the Italian Dolomites through our curated collection of premium cabins, complete with stunning mountain views and world-class amenities.
+A modern, full-stack luxury cabin rental application built with **Next.js**. Experience the beauty of the Italian Dolomites through our curated collection of premium cabins, complete with stunning mountain views and world-class amenities.
 
 ## 🌟 Features
 
@@ -151,66 +151,3 @@ Built with NextAuth.js supporting:
 - Protected routes and API endpoints
 - User profile management
 
-## 📊 Data Models
-
-### Cabin
-
-```typescript
-{
-  id: number;
-  name: string;
-  maxCapacity: number;
-  regularPrice: number;
-  discount: number;
-  image: string;
-  description: string;
-}
-```
-
-### Booking
-
-```typescript
-{
-  id: number;
-  created_at: string;
-  startDate: string;
-  endDate: string;
-  numNights: number;
-  numGuests: number;
-  totalPrice: number;
-  guestId: number;
-  cabinId: number;
-  observations?: string;
-}
-```
-
-## 🚀 Deployment
-
-The application is optimized for deployment on Vercel, Netlify, or any platform supporting Next.js applications.
-
-### Build Optimization
-
-- Static generation for cabin listings (ISR)
-- Image optimization with Next.js Image component
-- Code splitting and lazy loading
-- CSS optimization with Tailwind CSS
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is private and proprietary.
-
-## 📞 Support
-
-For support or questions, please contact the development team.
-
----
-
-_Experience luxury in the heart of the Italian Dolomites with The Wild Oasis._
