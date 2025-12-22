@@ -2,8 +2,8 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import type { Session, User } from "next-auth";
 import { createGuest, getGuest } from "./data-service";
+import { ExtendedUser } from "./types";
 
-type ExtendedUser = User & { guestId?: number };
 
 const authConfig = {
   providers: [

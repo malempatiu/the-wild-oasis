@@ -36,7 +36,6 @@ export async function updateGuest(formData: FormData) {
     throw new Error("Please provide a valid national ID");
 
   const updateData = { nationality, countryFlag, nationalID };
-  console.log(updateData)
 
   const { error } = await supabase
     .from("guests")

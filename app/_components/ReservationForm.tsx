@@ -2,6 +2,7 @@
 
 import { User } from "next-auth";
 import { Cabin } from "../_lib/types";
+import Image from "next/image";
 
 const ReservationForm = ({ cabin, user }: {cabin: Cabin, user: User}) => {
   const { maxCapacity } = cabin;
@@ -12,13 +13,16 @@ const ReservationForm = ({ cabin, user }: {cabin: Cabin, user: User}) => {
         <p>Logged in as</p>
 
         <div className='flex gap-4 items-center'>
-          <img
-            // Important to display google profile images
-            referrerPolicy='no-referrer'
-            className='h-8 rounded-full'
-            src={user.image || ""}
-            alt={user.name || "User profile picture"}
-          />
+          <div className='relative h-8 aspect-square'>
+            <Image
+              // Important to display google profile images
+              referrerPolicy='no-referrer'
+              fill
+              className='object-cover h-8 rounded-full'
+              src={user.image || ""}
+              alt={user.name || "User profile picture"}
+            />
+          </div>
           <p>{user.name}</p>
         </div>
       </div>

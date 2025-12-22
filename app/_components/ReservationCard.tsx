@@ -3,44 +3,29 @@ import { format, formatDistance, isPast, isToday, parseISO } from "date-fns";
 import {DeleteReservation} from "./DeleteReservation";
 import Image from "next/image";
 import Link from "next/link";
+import { BookingsWithCabin } from "../_lib/types";
 
 export const formatDistanceFromNow = (dateStr: string) =>
   formatDistance(parseISO(dateStr), new Date(), {
     addSuffix: true,
   }).replace("about ", "");
 
-type ReservationCard = {
-  id: string;
-  guestId: string;
-  startDate: string;
-  endDate: string;
-  numNights: number;
-  totalPrice: number;
-  numGuests: number;
-  status: string;
-  created_at: string;
-  cabins: {
-    name: string;
-    image: string;
-  };
-};
 
 type Props = {
-  booking: ReservationCard;
+  booking: BookingsWithCabin;
+  onDelete: (bookingId: number) => void;
 }
 
-const ReservationCard = ({ booking }: Props) =>{
+const ReservationCard = ({ booking, onDelete }: Props) =>{
   const {
     id,
-    guestId,
     startDate,
     endDate,
     numNights,
     totalPrice,
     numGuests,
-    status,
     created_at,
-    cabins: { name, image },
+    cabin: { name, image },
   } = booking;
 
   return (
@@ -48,6 +33,7 @@ const ReservationCard = ({ booking }: Props) =>{
       <div className='relative h-32 aspect-square'>
         <Image
           src={image}
+          fill
           alt={`Cabin ${name}`}
           className='object-cover border-r border-primary-800'
         />
@@ -97,7 +83,7 @@ const ReservationCard = ({ booking }: Props) =>{
           <PencilSquareIcon className='h-5 w-5 text-primary-600 group-hover:text-primary-800 transition-colors' />
           <span className='mt-1'>Edit</span>
         </Link>
-        <DeleteReservation bookingId={id} />
+        <DeleteReservation bookingId={id} onDelete={onDelete} />
       </div>
     </div>
   );
