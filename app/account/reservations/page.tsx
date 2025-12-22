@@ -1,27 +1,16 @@
-import {ReservationCard} from "@/app/_components/ReservationCard";
+import { ReservationList } from "@/app/_components/ReservationList";
+import { auth } from "@/app/_lib/auth";
+import { getBookings } from "@/app/_lib/data-service";
+import { ExtendedUser } from "@/app/_lib/types";
+import Link from "next/link";
 
 export const metadata = {
   title: "Reservations",
 };
 
-type Booking = {
-  id: string;
-  guestId: string;
-  startDate: string;
-  endDate: string;
-  numNights: number;
-  totalPrice: number;
-  numGuests: number;
-  status: string;
-  created_at: string;
-  cabins: {
-    name: string;
-    image: string;
-  };
-};
-
-const ReservationsPage = () =>{
-  const bookings: Booking[] = [];
+const ReservationsPage = async () =>{
+  const session = await auth();
+  const bookings = await getBookings((session?.user as ExtendedUser)?.guestId);
 
   return (
     <div>
@@ -29,19 +18,15 @@ const ReservationsPage = () =>{
         Your reservations
       </h2>
 
-      {!bookings.length ? (
+      {bookings.length === 0 ? (
         <p className='text-lg'>
           You have no reservations yet. Check out our{" "}
-          <a className='underline text-accent-500' href='/cabins'>
+          <Link className='underline text-accent-500' href='/cabins'>
             luxury cabins &rarr;
-          </a>
+          </Link>
         </p>
       ) : (
-        <ul className='space-y-6'>
-          {bookings.map((booking) => (
-            <ReservationCard booking={booking} key={booking.id} />
-          ))}
-        </ul>
+        <ReservationList bookings={bookings} />
       )}
     </div>
   );

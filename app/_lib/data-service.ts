@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { supabase } from "./api-client";
-import { BookingsWithCabin, Cabin, Guest } from "./types";
+import { Booking, BookingsWithCabin, BookingsWithCabins, Cabin, Guest } from "./types";
 import { eachDayOfInterval } from "date-fns";
 
 const getCountries = async() => {
@@ -86,7 +86,7 @@ const getSettings = async () => {
   return data?.[0];
 }
 
-const createGuest = async (newGuest: Guest) => {
+const createGuest = async (newGuest: Partial<Guest>) => {
   const { data, error } = await supabase.from("guests").insert([newGuest]);
 
   if (error) {
@@ -123,6 +123,24 @@ const getBookings = async (guestId: number): Promise<BookingsWithCabin[]> => {
     throw new Error("Bookings could not get loaded");
   }
 
+  return (data as unknown as BookingsWithCabins[])?.map((booking) => ({
+    ...booking,
+    cabin: booking.cabins,
+  })) as BookingsWithCabin[];
+}
+
+const getBooking = async (id: number): Promise<Booking> => {
+  const { data, error } = await supabase
+    .from("bookings")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Booking could not get loaded");
+  }
+
   return data;
 }
 
@@ -134,5 +152,6 @@ export {
   getSettings,
   createGuest,
   getGuest,
-  getBookings 
+  getBookings,
+  getBooking 
 };

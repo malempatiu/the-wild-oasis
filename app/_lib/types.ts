@@ -1,3 +1,5 @@
+import type { User } from "next-auth";
+
 export type Cabin = {
     id: number,
     name: string,
@@ -18,7 +20,7 @@ export type BookingSettings = {
 }
 
 export type Guest = {
-    id?: number,
+    id: number,
     email: string,
     fullName: string,
     nationality?: string,
@@ -36,8 +38,15 @@ export type Booking = {
     totalPrice: number;
     guestId: number;
     cabinId: number;
+    observations?: string;
+}
+
+export type BookingsWithCabins = Booking & {
+    cabins: Pick<Cabin, "name" | "image">
 }
 
 export type BookingsWithCabin = Booking & {
-    cabins: Pick<Cabin, "name" | "image">[]
+    cabin: Pick<Cabin, "name" | "image">
 }
+
+export type ExtendedUser = User & { guestId: number };

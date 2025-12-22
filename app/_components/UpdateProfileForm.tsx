@@ -1,11 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { updateGuest } from "../_lib/actions";
 import { Guest } from "../_lib/types";
 import { SubmitButton } from "./SubmitButton";
 
 const UpdateProfileForm = ({ children, guest }: { children: React.ReactNode, guest: Guest }) => {
-  const { fullName, email, nationality, nationalID, countryFlag } = guest;
+  const { fullName, email, nationalID, countryFlag } = guest;
 
   return (
     <form
@@ -35,11 +36,14 @@ const UpdateProfileForm = ({ children, guest }: { children: React.ReactNode, gue
       <div className='space-y-2'>
         <div className='flex items-center justify-between'>
           <label htmlFor='nationality'>Where are you from?</label>
-          <img
-            src={countryFlag}
-            alt='Country flag'
-            className='h-5 rounded-sm'
-          />
+          <div className='relative h-5 aspect-square'>
+            <Image
+              src={countryFlag ?? ''}
+              alt='Country flag'
+              fill
+              className='object-cover h-5 rounded-sm'
+            />
+          </div>
         </div>
 
         {children}
