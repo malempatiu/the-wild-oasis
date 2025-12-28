@@ -8,7 +8,7 @@ import {
 } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import { BookingSettings, Cabin } from "../_lib/types";
+import { BookingSettings, Cabin } from "@/app/_lib/types";
 import { useReservation } from "@/app/_context/ReservationContext";
 
 function isAlreadyBooked(range: { from?: Date; to?: Date }, datesArr: Date[]) {

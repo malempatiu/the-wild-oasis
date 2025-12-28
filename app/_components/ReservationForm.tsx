@@ -1,11 +1,11 @@
 "use client";
 
 import { User } from "next-auth";
-import { Cabin } from "../_lib/types";
+import { Cabin } from "@/app/_lib/types";
 import { SubmitButton } from "./SubmitButton";
-import { useReservation } from "../_context/ReservationContext";
+import { useReservation } from "@/app/_context/ReservationContext";
 import { differenceInDays } from "date-fns";
-import { createBooking } from "../_lib/actions";
+import { createBooking } from "@/app/_lib/actions";
 
 const ReservationForm = ({ cabin, user }: {cabin: Cabin, user: User}) => {
   const { range, resetRange } = useReservation();

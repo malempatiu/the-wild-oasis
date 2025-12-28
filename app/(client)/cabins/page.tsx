@@ -2,16 +2,20 @@ import { Suspense } from "react";
 import { CabinList } from "@/app/_components/CabinList";
 import { Spinner } from "@/app/_components/Spinner";
 import { CabinsFilter } from "@/app/_components/CabinsFilter";
-import { ReservationReminder } from "../_components/ReservationRemainder";
+import { ReservationReminder } from "@/app/_components/ReservationRemainder";
 
 // Revalidate every hour (ISR)
-export const revalidate = 3600; 
+export const revalidate = 3600;
 
 export const metadata = {
   title: "Cabins",
 };
 
-const CabinsPage = async({ searchParams }: { searchParams?: { capacity?: string } }) => {
+const CabinsPage = async ({
+  searchParams,
+}: {
+  searchParams?: { capacity?: string };
+}) => {
   const filter = (await searchParams)?.capacity ?? "all";
   return (
     <div>

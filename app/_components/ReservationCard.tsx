@@ -3,7 +3,7 @@ import { format, formatDistance, isPast, isToday, parseISO } from "date-fns";
 import {DeleteReservation} from "./DeleteReservation";
 import Image from "next/image";
 import Link from "next/link";
-import { BookingsWithCabin } from "../_lib/types";
+import { BookingsWithCabin } from "@/app/_lib/types";
 
 export const formatDistanceFromNow = (dateStr: string) =>
   formatDistance(parseISO(dateStr), new Date(), {

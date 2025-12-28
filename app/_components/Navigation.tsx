@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { auth } from "../_lib/auth";
+import { auth } from "@/app/_lib/auth";
 
 const Navigation = async() => {
   const session = await auth();

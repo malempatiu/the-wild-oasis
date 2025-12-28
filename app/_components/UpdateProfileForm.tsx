@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { updateGuest } from "../_lib/actions";
-import { Guest } from "../_lib/types";
+import { updateGuest } from "@/app/_lib/actions";
+import { Guest } from "@/app/_lib/types";
 import { SubmitButton } from "./SubmitButton";
 
 const UpdateProfileForm = ({ children, guest }: { children: React.ReactNode, guest: Guest }) => {

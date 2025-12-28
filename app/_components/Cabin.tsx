@@ -1,7 +1,7 @@
 import Image from "next/image";
 import {TextExpander} from "@/app/_components/TextExpander";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
-import { Cabin as CabinT} from "../_lib/types";
+import { Cabin as CabinT } from "@/app/_lib/types";
 
 const Cabin = ({ cabin }: {cabin: CabinT}) =>{
   const { name, maxCapacity, image, description } = cabin;
